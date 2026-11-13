@@ -1,4 +1,4 @@
-import type { Recipe } from "./recipes";
+import { formatMinutes, type Recipe } from "./recipes";
 
 export function formatAmount(amount: number, unit: string): string {
   const rounded = Math.round(amount * 100) / 100;
@@ -14,7 +14,7 @@ export function RecipeDetail({ recipe, onBack }: { recipe: Recipe; onBack: () =>
       <h2>{recipe.title}</h2>
       <p className="summary">{recipe.summary}</p>
       <p className="meta">
-        <span className="minutes">{recipe.minutes} min</span> · Serves {recipe.servings}
+        <span className="minutes">{formatMinutes(recipe.minutes)}</span> · Serves {recipe.servings}
       </p>
       <h3>Ingredients</h3>
       <ul className="ingredients">
