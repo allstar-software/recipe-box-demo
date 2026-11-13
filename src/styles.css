@@ -1,0 +1,109 @@
+:root {
+  --bg: #fafaf7;
+  --surface: #ffffff;
+  --text: #1f2328;
+  --muted: #5f6670;
+  --border: #e3e3dc;
+  --accent: #c2410c;
+  font-family: system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { max-width: 960px; margin: 0 auto; padding: 0 16px 48px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0;
+}
+.header h1 { margin: 0; color: var(--accent); }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.search {
+  flex: 1 1 240px;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.time-filter { display: flex; align-items: center; gap: 8px; }
+.time-filter select {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.card h2 { margin: 0 0 8px; font-size: 20px; }
+.summary { color: var(--muted); margin: 0 0 16px; }
+.card footer { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.minutes { font-weight: 600; }
+.tags { display: flex; gap: 6px; list-style: none; margin: 0; padding: 0; }
+.tags li {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.empty { color: var(--muted); }
+
+.card-title {
+  all: unset;
+  cursor: pointer;
+}
+.card-title:hover, .card-title:focus-visible { color: var(--accent); text-decoration: underline; }
+
+.detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.detail h2 { margin: 16px 0 8px; font-size: 28px; }
+.detail h3 { margin: 24px 0 8px; }
+.meta { color: var(--muted); }
+.back {
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+.ingredients { padding-left: 20px; line-height: 1.8; }
+.amount { font-weight: 600; }
+.steps { padding-left: 20px; line-height: 1.8; }
