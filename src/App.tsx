@@ -2,6 +2,7 @@ import { useState } from "react";
 import { recipes } from "./recipes";
 import { RecipeCard } from "./RecipeCard";
 import { RecipeDetail } from "./RecipeDetail";
+import { filterRecipes } from "./filter";
 
 const TIME_LIMITS = [15, 20, 30, 45];
 
@@ -11,11 +12,7 @@ export function App() {
   const [openId, setOpenId] = useState<string | null>(null);
   const open = recipes.find((r) => r.id === openId);
   const q = query.trim();
-  const shown = recipes.filter(
-    (r) =>
-      r.title.toLowerCase().includes(q.toLowerCase()) &&
-      (maxMinutes === null || r.minutes <= maxMinutes),
-  );
+  const shown = filterRecipes(recipes, query, maxMinutes);
 
   return (
     <div className="app">
