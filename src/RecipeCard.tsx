@@ -1,4 +1,4 @@
-import type { Recipe } from "./recipes";
+import { formatMinutes, type Recipe } from "./recipes";
 
 export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => void }) {
   return (
@@ -10,7 +10,7 @@ export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => v
       </h2>
       <p className="summary">{recipe.summary}</p>
       <footer>
-        <span className="minutes">{recipe.minutes} min</span>
+        <span className="minutes">{formatMinutes(recipe.minutes)}</span>
         <ul className="tags">
           {recipe.tags.map((tag) => (
             <li key={tag}>{tag}</li>
