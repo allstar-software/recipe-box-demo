@@ -1,8 +1,19 @@
 import type { Recipe } from "./recipes";
+import { WeekToggle } from "./WeekToggle";
 
-export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => void }) {
+export function RecipeCard({
+  recipe,
+  onOpen,
+  inWeek,
+  onToggleWeek,
+}: {
+  recipe: Recipe;
+  onOpen: () => void;
+  inWeek: boolean;
+  onToggleWeek: () => void;
+}) {
   return (
-    <article className="card">
+    <article className={inWeek ? "card in-week" : "card"}>
       <h2>
         <button type="button" className="card-title" onClick={onOpen}>
           {recipe.title}
@@ -17,6 +28,7 @@ export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => v
           ))}
         </ul>
       </footer>
+      <WeekToggle inWeek={inWeek} onToggle={onToggleWeek} />
     </article>
   );
 }
