@@ -1,8 +1,10 @@
 import type { Recipe } from "./recipes";
+import { RecipePhoto } from "./RecipePhoto";
 
 export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => void }) {
   return (
     <article className="card">
+      <RecipePhoto key={recipe.id} recipe={recipe} variant="card" />
       <h2>
         <button type="button" className="card-title" onClick={onOpen}>
           {recipe.title}

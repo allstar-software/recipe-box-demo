@@ -13,11 +13,13 @@ export type Recipe = {
   summary: string;
   ingredients: Ingredient[];
   steps: string[];
+  photo?: string;
 };
 
 export const recipes: Recipe[] = [
   {
     id: "shakshuka",
+    photo: "photos/shakshuka.svg",
     title: "Shakshuka",
     minutes: 30,
     servings: 2,
@@ -39,6 +41,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "pad-thai",
+    photo: "photos/pad-thai.svg",
     title: "Pad Thai",
     minutes: 25,
     servings: 2,
@@ -60,6 +63,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "minestrone",
+    photo: "photos/minestrone.svg",
     title: "Minestrone",
     minutes: 45,
     servings: 4,
@@ -81,6 +85,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "banana-bread",
+    photo: "photos/banana-bread.svg",
     title: "Banana Bread",
     minutes: 70,
     servings: 8,
@@ -102,6 +107,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "greek-salad",
+    photo: "photos/greek-salad.svg",
     title: "Greek Salad",
     minutes: 10,
     servings: 2,
@@ -121,6 +127,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "chicken-curry",
+    photo: "photos/chicken-curry.svg",
     title: "Chicken Curry",
     minutes: 50,
     servings: 4,
