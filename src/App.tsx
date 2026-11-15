@@ -19,7 +19,7 @@ export function App() {
 
   return (
     <div className="app">
-      <header className="header">
+      <header className={open ? "header no-print" : "header"}>
         <h1>Recipe Box</h1>
       </header>
       <main>

@@ -8,9 +8,14 @@ export function formatAmount(amount: number, unit: string): string {
 export function RecipeDetail({ recipe, onBack }: { recipe: Recipe; onBack: () => void }) {
   return (
     <article className="detail">
-      <button type="button" className="back" onClick={onBack}>
-        ← All recipes
-      </button>
+      <div className="detail-actions no-print">
+        <button type="button" className="back" onClick={onBack}>
+          ← All recipes
+        </button>
+        <button type="button" className="print" onClick={() => window.print()}>
+          Print
+        </button>
+      </div>
       <h2>{recipe.title}</h2>
       <p className="summary">{recipe.summary}</p>
       <p className="meta">

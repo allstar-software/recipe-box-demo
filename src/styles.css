@@ -104,6 +104,37 @@ body {
   color: var(--text);
   cursor: pointer;
 }
+.detail-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.print {
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+.print:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
 .ingredients { padding-left: 20px; line-height: 1.8; }
 .amount { font-weight: 600; }
 .steps { padding-left: 20px; line-height: 1.8; }
+
+@media print {
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  .app { max-width: none; padding: 0; }
+  .detail {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: #fff;
+    padding: 0;
+  }
+  .detail, .detail .meta, .detail .summary { color: #000; }
+  .detail li { break-inside: avoid; page-break-inside: avoid; }
+  .detail h2, .detail h3 { break-after: avoid; page-break-after: avoid; }
+}
