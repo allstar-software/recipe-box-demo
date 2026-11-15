@@ -1,4 +1,5 @@
 import type { Recipe } from "./recipes";
+import { RecipePhoto } from "./RecipePhoto";
 
 export function formatAmount(amount: number, unit: string): string {
   const rounded = Math.round(amount * 100) / 100;
@@ -11,6 +12,7 @@ export function RecipeDetail({ recipe, onBack }: { recipe: Recipe; onBack: () =>
       <button type="button" className="back" onClick={onBack}>
         ← All recipes
       </button>
+      <RecipePhoto key={recipe.id} recipe={recipe} variant="detail" />
       <h2>{recipe.title}</h2>
       <p className="summary">{recipe.summary}</p>
       <p className="meta">
