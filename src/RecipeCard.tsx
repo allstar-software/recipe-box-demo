@@ -1,6 +1,14 @@
 import type { Recipe } from "./recipes";
 
-export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => void }) {
+export function RecipeCard({
+  recipe,
+  note,
+  onOpen,
+}: {
+  recipe: Recipe;
+  note?: string | null;
+  onOpen: () => void;
+}) {
   return (
     <article className="card">
       <h2>
@@ -8,6 +16,7 @@ export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => v
           {recipe.title}
         </button>
       </h2>
+      {note && <p className="match-note">{note}</p>}
       <p className="summary">{recipe.summary}</p>
       <footer>
         <span className="minutes">{recipe.minutes} min</span>
