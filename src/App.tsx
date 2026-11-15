@@ -2,6 +2,7 @@ import { useState } from "react";
 import { recipes } from "./recipes";
 import { RecipeCard } from "./RecipeCard";
 import { RecipeDetail } from "./RecipeDetail";
+import { getStorage, loadFavourites, saveFavourites, starredFirst } from "./favourites";
 
 const TIME_LIMITS = [15, 20, 30, 45];
 
@@ -9,13 +10,23 @@ export function App() {
   const [query, setQuery] = useState("");
   const [maxMinutes, setMaxMinutes] = useState<number | null>(null);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [favourites, setFavourites] = useState<Set<string>>(() =>
+    loadFavourites(getStorage(), new Set(recipes.map((r) => r.id))),
+  );
+  const toggleFavourite = (id: string) => {
+    const next = new Set(favourites);
+    if (!next.delete(id)) next.add(id);
+    setFavourites(next);
+    saveFavourites(getStorage(), next);
+  };
   const open = recipes.find((r) => r.id === openId);
   const q = query.trim();
-  const shown = recipes.filter(
+  const filtered = recipes.filter(
     (r) =>
       r.title.toLowerCase().includes(q.toLowerCase()) &&
       (maxMinutes === null || r.minutes <= maxMinutes),
   );
+  const shown = starredFirst(filtered, (r) => favourites.has(r.id));
 
   return (
     <div className="app">
@@ -24,7 +35,11 @@ export function App() {
       </header>
       <main>
         {open ? (
-          <RecipeDetail recipe={open} onBack={() => setOpenId(null)} />
+          <RecipeDetail
+            recipe={open}
+            starred={favourites.has(open.id)}
+            onToggleStar={() => toggleFavourite(open.id)}
+            onBack={() => setOpenId(null)} />
         ) : (
         <>
         <div className="filters">
@@ -64,7 +79,13 @@ export function App() {
         ) : (
           <section className="grid">
             {shown.map((r) => (
-              <RecipeCard key={r.id} recipe={r} onOpen={() => setOpenId(r.id)} />
+              <RecipeCard
+                key={r.id}
+                recipe={r}
+                starred={favourites.has(r.id)}
+                onToggleStar={() => toggleFavourite(r.id)}
+                onOpen={() => setOpenId(r.id)}
+              />
             ))}
           </section>
         )}

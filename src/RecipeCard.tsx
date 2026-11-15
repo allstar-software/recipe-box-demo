@@ -1,13 +1,27 @@
 import type { Recipe } from "./recipes";
+import { StarButton } from "./StarButton";
 
-export function RecipeCard({ recipe, onOpen }: { recipe: Recipe; onOpen: () => void }) {
+export function RecipeCard({
+  recipe,
+  starred,
+  onToggleStar,
+  onOpen,
+}: {
+  recipe: Recipe;
+  starred: boolean;
+  onToggleStar: () => void;
+  onOpen: () => void;
+}) {
   return (
     <article className="card">
-      <h2>
-        <button type="button" className="card-title" onClick={onOpen}>
-          {recipe.title}
-        </button>
-      </h2>
+      <div className="card-head">
+        <h2>
+          <button type="button" className="card-title" onClick={onOpen}>
+            {recipe.title}
+          </button>
+        </h2>
+        <StarButton title={recipe.title} starred={starred} onToggle={onToggleStar} />
+      </div>
       <p className="summary">{recipe.summary}</p>
       <footer>
         <span className="minutes">{recipe.minutes} min</span>
