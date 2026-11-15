@@ -2,6 +2,7 @@ import { useState } from "react";
 import { recipes } from "./recipes";
 import { RecipeCard } from "./RecipeCard";
 import { RecipeDetail } from "./RecipeDetail";
+import { matchNote, matchRecipe } from "./search";
 
 const TIME_LIMITS = [15, 20, 30, 45];
 
@@ -11,11 +12,10 @@ export function App() {
   const [openId, setOpenId] = useState<string | null>(null);
   const open = recipes.find((r) => r.id === openId);
   const q = query.trim();
-  const shown = recipes.filter(
-    (r) =>
-      r.title.toLowerCase().includes(q.toLowerCase()) &&
-      (maxMinutes === null || r.minutes <= maxMinutes),
-  );
+  const shown = recipes.flatMap((r) => {
+    const match = matchRecipe(r, q);
+    return match && (maxMinutes === null || r.minutes <= maxMinutes) ? [{ r, match }] : [];
+  });
 
   return (
     <div className="app">
@@ -63,8 +63,13 @@ export function App() {
           </p>
         ) : (
           <section className="grid">
-            {shown.map((r) => (
-              <RecipeCard key={r.id} recipe={r} onOpen={() => setOpenId(r.id)} />
+            {shown.map(({ r, match }) => (
+              <RecipeCard
+                key={r.id}
+                recipe={r}
+                note={matchNote(match)}
+                onOpen={() => setOpenId(r.id)}
+              />
             ))}
           </section>
         )}

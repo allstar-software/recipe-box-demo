@@ -6,3 +6,7 @@ A small React app for browsing recipes: search them, filter by how long they tak
     npm run dev      # http://localhost:5173
 
 Or with Docker: `docker compose up`.
+
+    npm test         # unit tests for the search rule
+
+Search matches recipe names, ingredient names and tags. A recipe found only by an ingredient or tag shows what matched under its title.
